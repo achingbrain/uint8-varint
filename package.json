@@ -27,6 +27,10 @@
     ".": {
       "types": "./src/index.d.ts",
       "import": "./dist/src/index.js"
+    },
+    "./big": {
+      "types": "./src/big.d.ts",
+      "import": "./dist/src/big.js"
     }
   },
   "eslintConfig": {
@@ -125,7 +129,7 @@
     "lint": "aegir lint",
     "dep-check": "aegir dep-check",
     "build": "aegir build",
-    "test": "aegir test -t node",
+    "test": "aegir test",
     "test:node": "aegir test -t node --cov",
     "test:chrome": "aegir test -t browser --cov",
     "test:chrome-webworker": "aegir test -t webworker",
@@ -136,8 +140,8 @@
   },
   "dependencies": {
     "byte-access": "^1.0.0",
-    "longbits": "^1.0.0",
-    "uint8arraylist": "^1.5.2"
+    "longbits": "^1.0.1",
+    "uint8arraylist": "^2.0.0"
   },
   "devDependencies": {
     "aegir": "^37.4.6"
