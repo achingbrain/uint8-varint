@@ -34,6 +34,22 @@ varint.signed.encode(value, buf)
 varint.signed.decode(buf) // 12345
 ```
 
+`BigInt`s are also supported:
+
+```js
+import { Uint8ArrayList } from 'uint8arraylist'
+import * as varint from 'uint8-varint/big'
+
+const value = 12345n
+
+const buf = new Uint8ArrayList(
+  new Uint8Array(2)
+)
+varint.signed.encode(value, buf)
+
+varint.signed.decode(buf) // 12345n
+```
+
 ## License
 
 Licensed under either of
