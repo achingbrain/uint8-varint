@@ -1,6 +1,6 @@
 {
   "name": "uint8-varint",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Read/write varints from Uint8Arrays and Uint8ArrayLists",
   "license": "Apache-2.0 OR MIT",
   "homepage": "https://github.com/achingbrain/uint8-varint#readme",

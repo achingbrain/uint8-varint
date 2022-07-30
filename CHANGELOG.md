@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/achingbrain/uint8-varint/compare/v1.0.1...v1.0.2) (2022-07-30)
+
+
+### Bug Fixes
+
+* use alloc unsafe ([#4](https://github.com/achingbrain/uint8-varint/issues/4)) ([31e6368](https://github.com/achingbrain/uint8-varint/commit/31e6368d1ad0528963a4d4b48fb199dd819973b5))
+
 ## [1.0.1](https://github.com/achingbrain/uint8-varint/compare/v1.0.0...v1.0.1) (2022-07-30)
 
 
