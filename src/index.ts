@@ -1,5 +1,6 @@
 import type { Uint8ArrayList } from 'uint8arraylist'
 import { LongBits } from 'longbits'
+import { allocUnsafe } from './alloc.js'
 
 const N1 = Math.pow(2, 7)
 const N2 = Math.pow(2, 14)
@@ -58,7 +59,7 @@ export const unsigned = {
     }
 
     if (buf == null) {
-      buf = new Uint8Array(unsigned.encodingLength(value))
+      buf = allocUnsafe(unsigned.encodingLength(value))
     }
 
     LongBits.fromNumber(value).toBytes(buf, offset)
@@ -82,7 +83,7 @@ export const signed = {
 
   encode (value: number, buf?: Uint8ArrayList | Uint8Array, offset = 0): Uint8ArrayList | Uint8Array {
     if (buf == null) {
-      buf = new Uint8Array(signed.encodingLength(value))
+      buf = allocUnsafe(signed.encodingLength(value))
     }
 
     if (value < 0) {
