@@ -1,6 +1,7 @@
 import type { Uint8ArrayList } from 'uint8arraylist'
 import accessor from 'byte-access'
 import { LongBits } from 'longbits'
+import { allocUnsafe } from './alloc.js'
 
 const LIMIT = 0x7fn
 
@@ -16,7 +17,7 @@ export const unsigned = {
 
   encode (value: bigint, buf?: Uint8ArrayList | Uint8Array, offset = 0): Uint8ArrayList | Uint8Array {
     if (buf == null) {
-      buf = new Uint8Array(unsigned.encodingLength(value))
+      buf = allocUnsafe(unsigned.encodingLength(value))
     }
 
     const access = accessor(buf)
@@ -47,7 +48,7 @@ export const signed = {
 
   encode (value: bigint, buf?: Uint8ArrayList | Uint8Array, offset = 0): Uint8ArrayList | Uint8Array {
     if (buf == null) {
-      buf = new Uint8Array(signed.encodingLength(value))
+      buf = allocUnsafe(signed.encodingLength(value))
     }
 
     if (value < 0n) {
@@ -71,7 +72,7 @@ export const zigzag = {
 
   encode (value: bigint, buf?: Uint8ArrayList | Uint8Array, offset = 0): Uint8ArrayList | Uint8Array {
     if (buf == null) {
-      buf = new Uint8Array(zigzag.encodingLength(value))
+      buf = allocUnsafe(zigzag.encodingLength(value))
     }
 
     LongBits.fromBigInt(value).zzEncode().toBytes(buf, offset)
