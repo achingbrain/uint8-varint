@@ -8,11 +8,12 @@ describe('varint', () => {
   describe('signed', () => {
     it('should round trip signed values in a Uint8Array', () => {
       const value = 12345
-      const encodingLength = 3
+      const encodingLength = 2
 
       expect(varint.signed.encodingLength(value)).to.equal(encodingLength)
 
-      const buf = varint.signed.encode(value)
+      const buf = new Uint8Array(encodingLength)
+      varint.signed.encode(value, buf)
       expect(varint.signed.decode(buf)).to.equal(value)
     })
 
@@ -29,7 +30,7 @@ describe('varint', () => {
 
     it('should round trip signed values in a Uint8ArrayList', () => {
       const value = 12345
-      const encodingLength = 3
+      const encodingLength = 2
 
       expect(varint.signed.encodingLength(value)).to.equal(encodingLength)
 
@@ -51,47 +52,6 @@ describe('varint', () => {
       )
       varint.signed.encode(value, buf)
       expect(varint.signed.decode(buf)).to.equal(value)
-    })
-
-    function encodeDecode (value: number, bytes: number) {
-      const buf = varint.signed.encode(value)
-      expect(buf).to.have.property('byteLength', bytes)
-      expect(varint.signed.decode(buf)).to.equal(value)
-    }
-
-    it('single byte', () => {
-      encodeDecode(1, 1)
-      encodeDecode(-1, 1)
-      encodeDecode(63, 1)
-      encodeDecode(-64, 1)
-    })
-
-    it('double byte', () => {
-      encodeDecode(64, 2)
-      encodeDecode(-65, 2)
-      encodeDecode(127, 2)
-      encodeDecode(-128, 2)
-      encodeDecode(128, 2)
-      encodeDecode(-129, 2)
-      encodeDecode(255, 2)
-      encodeDecode(-256, 2)
-    })
-
-    it('tripple', () => {
-      encodeDecode(0x4000, 3)
-      encodeDecode(-0x4001, 3)
-      encodeDecode(1048574, 3)
-      encodeDecode(-1048575, 3)
-    })
-
-    it('quad', () => {
-      encodeDecode(134217726, 4)
-      encodeDecode(-134217727, 4)
-    })
-
-    it('large int', () => {
-      encodeDecode(0x80000000000, 7)
-      encodeDecode(-0x80000000000, 7)
     })
   })
 
@@ -261,6 +221,47 @@ describe('varint', () => {
       )
       varint.signed.encode(value, buf)
       expect(varint.signed.decode(buf)).to.equal(value)
+    })
+
+    function encodeDecode (value: number, bytes: number) {
+      const buf = varint.zigzag.encode(value)
+      expect(buf).to.have.property('byteLength', bytes)
+      expect(varint.zigzag.decode(buf)).to.equal(value)
+    }
+
+    it('single byte', () => {
+      encodeDecode(1, 1)
+      encodeDecode(-1, 1)
+      encodeDecode(63, 1)
+      encodeDecode(-64, 1)
+    })
+
+    it('double byte', () => {
+      encodeDecode(64, 2)
+      encodeDecode(-65, 2)
+      encodeDecode(127, 2)
+      encodeDecode(-128, 2)
+      encodeDecode(128, 2)
+      encodeDecode(-129, 2)
+      encodeDecode(255, 2)
+      encodeDecode(-256, 2)
+    })
+
+    it('tripple', () => {
+      encodeDecode(0x4000, 3)
+      encodeDecode(-0x4001, 3)
+      encodeDecode(1048574, 3)
+      encodeDecode(-1048575, 3)
+    })
+
+    it('quad', () => {
+      encodeDecode(134217726, 4)
+      encodeDecode(-134217727, 4)
+    })
+
+    it('large int', () => {
+      encodeDecode(0x80000000000, 7)
+      encodeDecode(-0x80000000000, 7)
     })
   })
 })
