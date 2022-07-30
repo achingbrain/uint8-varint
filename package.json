@@ -156,10 +156,12 @@
   },
   "dependencies": {
     "byte-access": "^1.0.0",
-    "longbits": "^1.0.1",
+    "longbits": "^1.1.0",
     "uint8arraylist": "^2.0.0"
   },
   "devDependencies": {
-    "aegir": "^37.4.6"
+    "@types/varint": "^6.0.0",
+    "aegir": "^37.4.6",
+    "varint": "^6.0.0"
   }
 }

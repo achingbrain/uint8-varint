@@ -1,11 +1,6 @@
 import type { Uint8ArrayList } from 'uint8arraylist'
-import accessor from 'byte-access'
 import { LongBits } from 'longbits'
 
-const MSB = 0x80
-const REST = 0x7F
-const MSBALL = ~REST
-const INT = Math.pow(2, 31)
 const N1 = Math.pow(2, 7)
 const N2 = Math.pow(2, 14)
 const N3 = Math.pow(2, 21)
@@ -57,115 +52,67 @@ export const unsigned = {
     return 10
   },
 
-  encode (value: number, buf: Uint8ArrayList | Uint8Array): void {
-    let offset = 0
-    const access = accessor(buf)
-
-    while (value >= INT) {
-      access.set(offset++, (value & 0xFF) | MSB)
-      value /= 128
+  encode (value: number, buf?: Uint8ArrayList | Uint8Array, offset = 0): Uint8ArrayList | Uint8Array {
+    if (Number.MAX_SAFE_INTEGER != null && value > Number.MAX_SAFE_INTEGER) {
+      throw new RangeError('Could not encode varint')
     }
 
-    while ((value & MSBALL) > 0) {
-      access.set(offset++, (value & 0xFF) | MSB)
-      value >>>= 7
+    if (buf == null) {
+      buf = new Uint8Array(unsigned.encodingLength(value))
     }
 
-    access.set(offset, value | 0)
+    LongBits.fromNumber(value).toBytes(buf, offset)
+
+    return buf
   },
 
   decode (buf: Uint8ArrayList | Uint8Array, offset: number = 0): number {
-    const access = accessor(buf)
-    let value = 4294967295 // optimizer type-hint, tends to deopt otherwise (?!)
-
-    value = (access.get(offset) & 127) >>> 0
-
-    if (access.get(offset++) < 128) {
-      return value
-    }
-
-    value = (value | (access.get(offset) & 127) << 7) >>> 0
-
-    if (access.get(offset++) < 128) {
-      return value
-    }
-
-    value = (value | (access.get(offset) & 127) << 14) >>> 0
-
-    if (access.get(offset++) < 128) {
-      return value
-    }
-
-    value = (value | (access.get(offset) & 127) << 21) >>> 0
-
-    if (access.get(offset++) < 128) {
-      return value
-    }
-
-    value = (value | (access.get(offset) & 15) << 28) >>> 0
-
-    if (access.get(offset++) < 128) {
-      return value
-    }
-
-    if ((offset += 5) > buf.length) {
-      throw RangeError(`index out of range: ${offset} > ${buf.length}`)
-    }
-
-    return value
+    return LongBits.fromBytes(buf, offset).toNumber(true)
   }
 }
 
 export const signed = {
   encodingLength (value: number): number {
     if (value < 0) {
-      return 10 // 10 bytes per spec
+      return 10 // 10 bytes per spec - https://developers.google.com/protocol-buffers/docs/encoding#signed-ints
     }
 
     return unsigned.encodingLength(value)
   },
 
-  encode (value: number, buf: Uint8ArrayList | Uint8Array): void {
-    if (value < 0) {
-      let offset = 0
-      const access = accessor(buf)
-      const bits = LongBits.fromNumber(value)
-
-      while (bits.hi > 0) {
-        access.set(offset++, bits.lo & 127 | 128)
-        bits.lo = (bits.lo >>> 7 | bits.hi << 25) >>> 0
-        bits.hi >>>= 7
-      }
-
-      while (bits.lo > 127) {
-        access.set(offset++, bits.lo & 127 | 128)
-        bits.lo = bits.lo >>> 7
-      }
-
-      access.set(offset++, bits.lo)
+  encode (value: number, buf?: Uint8ArrayList | Uint8Array, offset = 0): Uint8ArrayList | Uint8Array {
+    if (buf == null) {
+      buf = new Uint8Array(signed.encodingLength(value))
     }
 
-    unsigned.encode(value, buf)
+    if (value < 0) {
+      LongBits.fromNumber(value).toBytes(buf, offset)
+
+      return buf
+    }
+
+    return unsigned.encode(value, buf)
   },
 
-  decode (data: Uint8ArrayList | Uint8Array, offset = 0): number {
-    return unsigned.decode(data, offset) | 0
+  decode (buf: Uint8ArrayList | Uint8Array, offset = 0): number {
+    return LongBits.fromBytes(buf, offset).toNumber(false)
   }
 }
 
 export const zigzag = {
   encodingLength (value: number): number {
-    value = (value << 1 ^ value >> 31) >>> 0
-    return unsigned.encodingLength(value)
+    return unsigned.encodingLength(value >= 0 ? value * 2 : value * -2 - 1)
   },
 
-  encode (value: number, buf: Uint8ArrayList | Uint8Array, offset = 0): void {
-    value = (value << 1 ^ value >> 31) >>> 0
-    unsigned.encode(value, buf)
+  encode (value: number, buf?: Uint8ArrayList | Uint8Array, offset = 0): Uint8ArrayList | Uint8Array {
+    value = value >= 0 ? value * 2 : (value * -2) - 1
+
+    return unsigned.encode(value, buf, offset)
   },
 
-  decode (data: Uint8ArrayList | Uint8Array, offset = 0): number {
-    const value = unsigned.decode(data, offset)
-    return value >>> 1 ^ -(value & 1) | 0
+  decode (buf: Uint8ArrayList | Uint8Array, offset = 0): number {
+    const value = unsigned.decode(buf, offset)
+
+    return (value & 1) !== 0 ? (value + 1) / -2 : value / 2
   }
 }
