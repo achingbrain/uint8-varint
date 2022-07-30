@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/achingbrain/uint8-varint/compare/v1.0.0...v1.0.1) (2022-07-30)
+
+
+### Bug Fixes
+
+* make buffers optional ([#3](https://github.com/achingbrain/uint8-varint/issues/3)) ([b0fa48f](https://github.com/achingbrain/uint8-varint/commit/b0fa48f7e9dc5932471a3a1a20f4e993cfb818cb))
+
 ## 1.0.0 (2022-07-28)
 
 
