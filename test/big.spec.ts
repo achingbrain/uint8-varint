@@ -4,7 +4,7 @@ import { expect } from 'aegir/chai'
 import { Uint8ArrayList } from 'uint8arraylist'
 import * as varint from '../src/big.js'
 
-describe('varint', () => {
+describe('big varint', () => {
   describe('signed', () => {
     it('should round trip signed values in a Uint8Array', () => {
       const value = 12345n
