@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/achingbrain/uint8-varint/compare/v1.0.2...v1.0.3) (2022-08-05)
+
+
+### Bug Fixes
+
+* improve derived return type of encode method ([#5](https://github.com/achingbrain/uint8-varint/issues/5)) ([298894c](https://github.com/achingbrain/uint8-varint/commit/298894c765a2c0a6b36654e747799af03e97dcd9))
+
 ## [1.0.2](https://github.com/achingbrain/uint8-varint/compare/v1.0.1...v1.0.2) (2022-07-30)
 
 
