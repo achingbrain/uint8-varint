@@ -1,6 +1,6 @@
 import type { Uint8ArrayList } from 'uint8arraylist'
 import { LongBits } from 'longbits'
-import { allocUnsafe } from './alloc.js'
+import { allocUnsafe } from 'uint8arrays/alloc'
 
 const N1 = Math.pow(2, 7)
 const N2 = Math.pow(2, 14)
@@ -12,7 +12,13 @@ const N7 = Math.pow(2, 49)
 const N8 = Math.pow(2, 56)
 const N9 = Math.pow(2, 63)
 
-export const unsigned = {
+interface VarintCodec {
+  encodingLength: (value: number) => number
+  encode: ((value: number) => Uint8Array) & ((value: number, buf: Uint8Array, offset?: number) => Uint8Array) & ((value: number, buf: Uint8ArrayList, offset?: number) => Uint8ArrayList)
+  decode: (buf: Uint8ArrayList | Uint8Array, offset?: number) => number
+}
+
+export const unsigned: VarintCodec = {
   encodingLength  (value: number): number {
     if (value < N1) {
       return 1
@@ -53,7 +59,7 @@ export const unsigned = {
     return 10
   },
 
-  encode (value: number, buf?: Uint8ArrayList | Uint8Array, offset = 0): Uint8ArrayList | Uint8Array {
+  encode (value: number, buf?: any, offset: number = 0) {
     if (Number.MAX_SAFE_INTEGER != null && value > Number.MAX_SAFE_INTEGER) {
       throw new RangeError('Could not encode varint')
     }
@@ -72,7 +78,7 @@ export const unsigned = {
   }
 }
 
-export const signed = {
+export const signed: VarintCodec = {
   encodingLength (value: number): number {
     if (value < 0) {
       return 10 // 10 bytes per spec - https://developers.google.com/protocol-buffers/docs/encoding#signed-ints
@@ -81,7 +87,7 @@ export const signed = {
     return unsigned.encodingLength(value)
   },
 
-  encode (value: number, buf?: Uint8ArrayList | Uint8Array, offset = 0): Uint8ArrayList | Uint8Array {
+  encode (value: any, buf?: any, offset?: any) {
     if (buf == null) {
       buf = allocUnsafe(signed.encodingLength(value))
     }
@@ -92,7 +98,7 @@ export const signed = {
       return buf
     }
 
-    return unsigned.encode(value, buf)
+    return unsigned.encode(value, buf, offset)
   },
 
   decode (buf: Uint8ArrayList | Uint8Array, offset = 0): number {
@@ -100,12 +106,13 @@ export const signed = {
   }
 }
 
-export const zigzag = {
+export const zigzag: VarintCodec = {
   encodingLength (value: number): number {
     return unsigned.encodingLength(value >= 0 ? value * 2 : value * -2 - 1)
   },
 
-  encode (value: number, buf?: Uint8ArrayList | Uint8Array, offset = 0): Uint8ArrayList | Uint8Array {
+  // @ts-expect-error
+  encode (value: any, buf?: any, offset?: any) {
     value = value >= 0 ? value * 2 : (value * -2) - 1
 
     return unsigned.encode(value, buf, offset)
