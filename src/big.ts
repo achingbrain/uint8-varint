@@ -1,12 +1,18 @@
 import type { Uint8ArrayList } from 'uint8arraylist'
 import accessor from 'byte-access'
 import { LongBits } from 'longbits'
-import { allocUnsafe } from './alloc.js'
+import { allocUnsafe } from 'uint8arrays/alloc'
 
 const LIMIT = 0x7fn
 
+interface BigVarintCodec {
+  encodingLength: (value: bigint) => number
+  encode: ((value: bigint) => Uint8Array) & ((value: bigint, buf: Uint8Array, offset?: number) => Uint8Array) & ((value: bigint, buf: Uint8ArrayList, offset?: number) => Uint8ArrayList)
+  decode: (buf: Uint8ArrayList | Uint8Array, offset?: number) => bigint
+}
+
 // https://github.com/joeltg/big-varint/blob/main/src/unsigned.ts
-export const unsigned = {
+export const unsigned: BigVarintCodec = {
   encodingLength (value: bigint): number {
     let i = 0
     for (; value >= 0x80n; i++) {
@@ -15,7 +21,7 @@ export const unsigned = {
     return i + 1
   },
 
-  encode (value: bigint, buf?: Uint8ArrayList | Uint8Array, offset = 0): Uint8ArrayList | Uint8Array {
+  encode (value: any, buf?: any, offset: any = 0) {
     if (buf == null) {
       buf = allocUnsafe(unsigned.encodingLength(value))
     }
@@ -37,7 +43,7 @@ export const unsigned = {
   }
 }
 
-export const signed = {
+export const signed: BigVarintCodec = {
   encodingLength (value: bigint): number {
     if (value < 0n) {
       return 10 // 10 bytes per spec
@@ -46,7 +52,7 @@ export const signed = {
     return unsigned.encodingLength(value)
   },
 
-  encode (value: bigint, buf?: Uint8ArrayList | Uint8Array, offset = 0): Uint8ArrayList | Uint8Array {
+  encode (value: any, buf?: any, offset?: any) {
     if (buf == null) {
       buf = allocUnsafe(signed.encodingLength(value))
     }
@@ -65,12 +71,12 @@ export const signed = {
   }
 }
 
-export const zigzag = {
+export const zigzag: BigVarintCodec = {
   encodingLength (value: bigint): number {
     return unsigned.encodingLength(value >= 0 ? value * 2n : value * -2n - 1n)
   },
 
-  encode (value: bigint, buf?: Uint8ArrayList | Uint8Array, offset = 0): Uint8ArrayList | Uint8Array {
+  encode (value: any, buf?: any, offset?: any) {
     if (buf == null) {
       buf = allocUnsafe(zigzag.encodingLength(value))
     }

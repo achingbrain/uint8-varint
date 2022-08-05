@@ -157,11 +157,13 @@
   "dependencies": {
     "byte-access": "^1.0.0",
     "longbits": "^1.1.0",
-    "uint8arraylist": "^2.0.0"
+    "uint8arraylist": "^2.0.0",
+    "uint8arrays": "^3.1.0"
   },
   "devDependencies": {
     "@types/varint": "^6.0.0",
     "aegir": "^37.4.6",
+    "benchmark": "^2.1.4",
     "varint": "^6.0.0"
   }
 }
