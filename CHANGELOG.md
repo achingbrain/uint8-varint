@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/achingbrain/uint8-varint/compare/v1.0.3...v1.0.4) (2022-10-12)
+
+
+### Dependencies
+
+* update uint8arrays from 3.x.x to 4.x.x ([#6](https://github.com/achingbrain/uint8-varint/issues/6)) ([87c2307](https://github.com/achingbrain/uint8-varint/commit/87c2307250a371f1586e50f336cf6278081cf707))
+
 ## [1.0.3](https://github.com/achingbrain/uint8-varint/compare/v1.0.2...v1.0.3) (2022-08-05)
 
 
