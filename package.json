@@ -162,7 +162,7 @@
   },
   "devDependencies": {
     "@types/varint": "^6.0.0",
-    "aegir": "^37.4.6",
+    "aegir": "^38.1.5",
     "benchmark": "^2.1.4",
     "varint": "^6.0.0"
   }
