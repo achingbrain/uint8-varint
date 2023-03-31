@@ -193,7 +193,7 @@ describe('varint', () => {
       }).to.throw(RangeError)
     })
 
-    function randint (range: number) {
+    function randint (range: number): number {
       return Math.floor(Math.random() * range)
     }
   })
@@ -223,7 +223,7 @@ describe('varint', () => {
       expect(varint.signed.decode(buf)).to.equal(value)
     })
 
-    function encodeDecode (value: number, bytes: number) {
+    function encodeDecode (value: number, bytes: number): void {
       const buf = varint.zigzag.encode(value)
       expect(buf).to.have.property('byteLength', bytes)
       expect(varint.zigzag.decode(buf)).to.equal(value)
