@@ -2,18 +2,16 @@ name: test & maybe release
 on:
   push:
     branches:
-      - master # with #262 - ${{{ github.default_branch }}}
+      - master
   pull_request:
-    branches:
-      - master # with #262 - ${{{ github.default_branch }}}
 
 jobs:
 
   check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
       with:
         node-version: lts/*
     - uses: ipfs/aegir/actions/cache-node-modules@master
@@ -26,16 +24,16 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
-        node: [16]
+        node: [lts/*]
       fail-fast: true
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
       - uses: ipfs/aegir/actions/cache-node-modules@master
       - run: npm run --if-present test:node
-      - uses: codecov/codecov-action@81cd2dc8148241f03f5839d295e000b8f761e378 # v3.1.0
+      - uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 # v3.1.1
         with:
           flags: node
 
@@ -43,13 +41,13 @@ jobs:
     needs: check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: lts/*
       - uses: ipfs/aegir/actions/cache-node-modules@master
       - run: npm run --if-present test:chrome
-      - uses: codecov/codecov-action@81cd2dc8148241f03f5839d295e000b8f761e378 # v3.1.0
+      - uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 # v3.1.1
         with:
           flags: chrome
 
@@ -57,13 +55,13 @@ jobs:
     needs: check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: lts/*
       - uses: ipfs/aegir/actions/cache-node-modules@master
       - run: npm run --if-present test:chrome-webworker
-      - uses: codecov/codecov-action@81cd2dc8148241f03f5839d295e000b8f761e378 # v3.1.0
+      - uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 # v3.1.1
         with:
           flags: chrome-webworker
 
@@ -71,13 +69,13 @@ jobs:
     needs: check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: lts/*
       - uses: ipfs/aegir/actions/cache-node-modules@master
       - run: npm run --if-present test:firefox
-      - uses: codecov/codecov-action@81cd2dc8148241f03f5839d295e000b8f761e378 # v3.1.0
+      - uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 # v3.1.1
         with:
           flags: firefox
 
@@ -85,27 +83,65 @@ jobs:
     needs: check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: lts/*
       - uses: ipfs/aegir/actions/cache-node-modules@master
       - run: npm run --if-present test:firefox-webworker
-      - uses: codecov/codecov-action@81cd2dc8148241f03f5839d295e000b8f761e378 # v3.1.0
+      - uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 # v3.1.1
         with:
           flags: firefox-webworker
+
+  test-webkit:
+    needs: check
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node: [lts/*]
+      fail-fast: true
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+      - uses: ipfs/aegir/actions/cache-node-modules@master
+      - run: npm run --if-present test:webkit
+      - uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 # v3.1.1
+        with:
+          flags: webkit
+
+  test-webkit-webworker:
+    needs: check
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node: [lts/*]
+      fail-fast: true
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+      - uses: ipfs/aegir/actions/cache-node-modules@master
+      - run: npm run --if-present test:webkit-webworker
+      - uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 # v3.1.1
+        with:
+          flags: webkit-webworker
 
   test-electron-main:
     needs: check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: lts/*
       - uses: ipfs/aegir/actions/cache-node-modules@master
       - run: npx xvfb-maybe npm run --if-present test:electron-main
-      - uses: codecov/codecov-action@81cd2dc8148241f03f5839d295e000b8f761e378 # v3.1.0
+      - uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 # v3.1.1
         with:
           flags: electron-main
 
@@ -113,25 +149,25 @@ jobs:
     needs: check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: lts/*
       - uses: ipfs/aegir/actions/cache-node-modules@master
       - run: npx xvfb-maybe npm run --if-present test:electron-renderer
-      - uses: codecov/codecov-action@81cd2dc8148241f03f5839d295e000b8f761e378 # v3.1.0
+      - uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 # v3.1.1
         with:
           flags: electron-renderer
 
   release:
-    needs: [test-node, test-chrome, test-chrome-webworker, test-firefox, test-firefox-webworker, test-electron-main, test-electron-renderer]
+    needs: [test-node, test-chrome, test-chrome-webworker, test-firefox, test-firefox-webworker, test-webkit, test-webkit-webworker, test-electron-main, test-electron-renderer]
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master' # with #262 - 'refs/heads/${{{ github.default_branch }}}'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: lts/*
       - uses: ipfs/aegir/actions/cache-node-modules@master
@@ -141,5 +177,5 @@ jobs:
           docker-username: ${{ secrets.DOCKER_USERNAME }}
       - run: npm run --if-present release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.UCI_GITHUB_TOKEN || github.token }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

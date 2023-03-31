@@ -35,17 +35,17 @@
   },
   "files": [
     "src",
-    "dist/src",
+    "dist",
     "!dist/test",
     "!**/*.tsbuildinfo"
   ],
   "exports": {
     ".": {
-      "types": "./src/index.d.ts",
+      "types": "./dist/src/index.d.ts",
       "import": "./dist/src/index.js"
     },
     "./big": {
-      "types": "./src/big.d.ts",
+      "types": "./dist/src/big.d.ts",
       "import": "./dist/src/big.js"
     }
   },
@@ -152,7 +152,8 @@
     "test:firefox": "aegir test -t browser -- --browser firefox",
     "test:firefox-webworker": "aegir test -t webworker -- --browser firefox",
     "test:electron-main": "aegir test -t electron-main",
-    "release": "aegir release"
+    "release": "aegir release",
+    "docs": "aegir docs"
   },
   "dependencies": {
     "byte-access": "^1.0.0",
