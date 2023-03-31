@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/achingbrain/uint8-varint/compare/v1.0.5...v1.0.6) (2023-03-31)
+
+
+### Bug Fixes
+
+* correct path to types ([#15](https://github.com/achingbrain/uint8-varint/issues/15)) ([e23e8f3](https://github.com/achingbrain/uint8-varint/commit/e23e8f3f10c01b4814392498d0ea2d07fecc5c2d))
+
 ## [1.0.5](https://github.com/achingbrain/uint8-varint/compare/v1.0.4...v1.0.5) (2023-03-31)
 
 
