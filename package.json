@@ -43,10 +43,6 @@
     ".": {
       "types": "./dist/src/index.d.ts",
       "import": "./dist/src/index.js"
-    },
-    "./big": {
-      "types": "./dist/src/big.d.ts",
-      "import": "./dist/src/big.js"
     }
   },
   "eslintConfig": {
@@ -156,8 +152,6 @@
     "docs": "aegir docs"
   },
   "dependencies": {
-    "byte-access": "^1.0.0",
-    "longbits": "^1.1.0",
     "uint8arraylist": "^2.0.0",
     "uint8arrays": "^4.0.2"
   },
@@ -165,6 +159,8 @@
     "@types/varint": "^6.0.0",
     "aegir": "^38.1.8",
     "benchmark": "^2.1.4",
+    "byte-access": "^1.0.0",
+    "longbits": "^1.1.0",
     "varint": "^6.0.0"
   }
 }
