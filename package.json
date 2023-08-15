@@ -1,7 +1,7 @@
 {
   "name": "uint8-varint",
   "version": "1.0.8",
-  "description": "Read/write varints from Uint8Arrays and Uint8ArrayLists",
+  "description": "Read/write unsigned varints from Uint8Arrays and Uint8ArrayLists",
   "license": "Apache-2.0 OR MIT",
   "homepage": "https://github.com/achingbrain/uint8-varint#readme",
   "repository": {
@@ -39,10 +39,6 @@
     ".": {
       "types": "./dist/src/index.d.ts",
       "import": "./dist/src/index.js"
-    },
-    "./big": {
-      "types": "./dist/src/big.d.ts",
-      "import": "./dist/src/big.js"
     }
   },
   "eslintConfig": {
@@ -152,8 +148,6 @@
     "docs": "aegir docs"
   },
   "dependencies": {
-    "byte-access": "^1.0.0",
-    "longbits": "^1.1.0",
     "uint8arraylist": "^2.0.0",
     "uint8arrays": "^4.0.2"
   },
@@ -161,6 +155,8 @@
     "@types/varint": "^6.0.0",
     "aegir": "^40.0.0",
     "benchmark": "^2.1.4",
+    "byte-access": "^1.0.0",
+    "longbits": "^1.1.0",
     "varint": "^6.0.0"
   }
 }
