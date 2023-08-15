@@ -1,3 +1,14 @@
+## [2.0.0](https://github.com/achingbrain/uint8-varint/compare/v1.0.8...v2.0.0) (2023-08-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* zigzag, signed and long encodings have been removed, import * for unsigned encode/decode
+
+### Features
+
+* remove zigzag, signed and long, now only supports unsigned varints ([#30](https://github.com/achingbrain/uint8-varint/issues/30)) ([29efeac](https://github.com/achingbrain/uint8-varint/commit/29efeaca0946e3f70dae880bb39f17456971b322)), closes [#27](https://github.com/achingbrain/uint8-varint/issues/27)
+
 ## [1.0.8](https://github.com/achingbrain/uint8-varint/compare/v1.0.7...v1.0.8) (2023-08-15)
 
 
