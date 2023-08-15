@@ -1,6 +1,6 @@
 /* eslint-disable no-fallthrough */
-import type { Uint8ArrayList } from 'uint8arraylist'
 import { allocUnsafe } from 'uint8arrays/alloc'
+import type { Uint8ArrayList } from 'uint8arraylist'
 
 const N1 = Math.pow(2, 7)
 const N2 = Math.pow(2, 14)

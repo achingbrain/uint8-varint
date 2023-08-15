@@ -1,7 +1,7 @@
 {
   "name": "uint8-varint",
   "version": "1.0.6",
-  "description": "Read/write varints from Uint8Arrays and Uint8ArrayLists",
+  "description": "Read/write unsigned varints from Uint8Arrays and Uint8ArrayLists",
   "license": "Apache-2.0 OR MIT",
   "homepage": "https://github.com/achingbrain/uint8-varint#readme",
   "repository": {
@@ -157,7 +157,7 @@
   },
   "devDependencies": {
     "@types/varint": "^6.0.0",
-    "aegir": "^38.1.8",
+    "aegir": "^40.0.0",
     "benchmark": "^2.1.4",
     "byte-access": "^1.0.0",
     "longbits": "^1.1.0",

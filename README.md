@@ -3,7 +3,7 @@
 [![codecov](https://img.shields.io/codecov/c/github/achingbrain/uint8-varint.svg?style=flat-square)](https://codecov.io/gh/achingbrain/uint8-varint)
 [![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/uint8-varint/js-test-and-release.yml?branch=master\&style=flat-square)](https://github.com/achingbrain/uint8-varint/actions/workflows/js-test-and-release.yml?query=branch%3Amaster)
 
-> Read/write varints from Uint8Arrays and Uint8ArrayLists
+> Read/write unsigned varints from Uint8Arrays and Uint8ArrayLists
 
 ## Table of contents <!-- omit in toc -->
 
