@@ -53,37 +53,30 @@ export function encodingLength (value: number): number {
 
 export function encodeUint8Array (value: number, buf: Uint8Array, offset: number = 0): Uint8Array {
   switch (encodingLength(value)) {
-    // @ts-expect-error
     case 8: {
       buf[offset++] = (value & 0xFF) | MSB
       value /= 128
     }
-    // @ts-expect-error
     case 7: {
       buf[offset++] = (value & 0xFF) | MSB
       value /= 128
     }
-    // @ts-expect-error
     case 6: {
       buf[offset++] = (value & 0xFF) | MSB
       value /= 128
     }
-    // @ts-expect-error
     case 5: {
       buf[offset++] = (value & 0xFF) | MSB
       value /= 128
     }
-    // @ts-expect-error
     case 4: {
       buf[offset++] = (value & 0xFF) | MSB
       value >>>= 7
     }
-    // @ts-expect-error
     case 3: {
       buf[offset++] = (value & 0xFF) | MSB
       value >>>= 7
     }
-    // @ts-expect-error
     case 2: {
       buf[offset++] = (value & 0xFF) | MSB
       value >>>= 7
@@ -100,37 +93,30 @@ export function encodeUint8Array (value: number, buf: Uint8Array, offset: number
 
 export function encodeUint8ArrayList (value: number, buf: Uint8ArrayList, offset: number = 0): Uint8ArrayList {
   switch (encodingLength(value)) {
-    // @ts-expect-error
     case 8: {
       buf.set(offset++, (value & 0xFF) | MSB)
       value /= 128
     }
-    // @ts-expect-error
     case 7: {
       buf.set(offset++, (value & 0xFF) | MSB)
       value /= 128
     }
-    // @ts-expect-error
     case 6: {
       buf.set(offset++, (value & 0xFF) | MSB)
       value /= 128
     }
-    // @ts-expect-error
     case 5: {
       buf.set(offset++, (value & 0xFF) | MSB)
       value /= 128
     }
-    // @ts-expect-error
     case 4: {
       buf.set(offset++, (value & 0xFF) | MSB)
       value >>>= 7
     }
-    // @ts-expect-error
     case 3: {
       buf.set(offset++, (value & 0xFF) | MSB)
       value >>>= 7
     }
-    // @ts-expect-error
     case 2: {
       buf.set(offset++, (value & 0xFF) | MSB)
       value >>>= 7
