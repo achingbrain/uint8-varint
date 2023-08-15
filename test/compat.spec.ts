@@ -1,8 +1,8 @@
 /* eslint-env mocha */
 
 import { expect } from 'aegir/chai'
-import * as uint8varint from '../src/index.js'
 import varint from 'varint'
+import * as uint8varint from '../src/index.js'
 
 describe('varint', () => {
   it('compat', () => {

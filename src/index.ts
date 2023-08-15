@@ -1,6 +1,6 @@
-import type { Uint8ArrayList } from 'uint8arraylist'
 import { LongBits } from 'longbits'
 import { allocUnsafe } from 'uint8arrays/alloc'
+import type { Uint8ArrayList } from 'uint8arraylist'
 
 const N1 = Math.pow(2, 7)
 const N2 = Math.pow(2, 14)
@@ -111,7 +111,7 @@ export const zigzag: VarintCodec = {
     return unsigned.encodingLength(value >= 0 ? value * 2 : value * -2 - 1)
   },
 
-  // @ts-expect-error
+  // @ts-expect-error types are wrong
   encode (value: any, buf?: any, offset?: any) {
     value = value >= 0 ? value * 2 : (value * -2) - 1
 

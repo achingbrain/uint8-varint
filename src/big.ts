@@ -1,7 +1,7 @@
-import type { Uint8ArrayList } from 'uint8arraylist'
 import accessor from 'byte-access'
 import { LongBits } from 'longbits'
 import { allocUnsafe } from 'uint8arrays/alloc'
+import type { Uint8ArrayList } from 'uint8arraylist'
 
 const LIMIT = 0x7fn
 
