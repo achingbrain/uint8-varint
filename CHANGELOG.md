@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/achingbrain/uint8-varint/compare/v1.0.7...v1.0.8) (2023-08-15)
+
+
+### Bug Fixes
+
+* update project config ([#29](https://github.com/achingbrain/uint8-varint/issues/29)) ([1bfa423](https://github.com/achingbrain/uint8-varint/commit/1bfa423a1778e289934b59ea698d34d7c3c3b0d8))
+
 ## [1.0.7](https://github.com/achingbrain/uint8-varint/compare/v1.0.6...v1.0.7) (2023-08-15)
 
 
