@@ -6,10 +6,10 @@ $ npx playwright-test benchmarks/append.js --runner benchmark
 */
 
 import Benchmark from 'benchmark'
+import accessor from 'byte-access'
+import { LongBits } from 'longbits'
 import { allocUnsafe } from 'uint8arrays/alloc'
 import { unsigned } from '../dist/src/index.js'
-import { LongBits } from 'longbits'
-import accessor from 'byte-access'
 
 const suite = new Benchmark.Suite()
 
