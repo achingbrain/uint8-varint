@@ -1,3 +1,15 @@
+## [2.0.1](https://github.com/achingbrain/uint8-varint/compare/v2.0.0...v2.0.1) (2023-08-16)
+
+
+### Bug Fixes
+
+* ensure Uint8Array type is returned by default ([#31](https://github.com/achingbrain/uint8-varint/issues/31)) ([4bed840](https://github.com/achingbrain/uint8-varint/commit/4bed8406ff0a0201dddaacb006f54399460f5523))
+
+
+### Trivial Changes
+
+* remove extra file ([747c0b4](https://github.com/achingbrain/uint8-varint/commit/747c0b4126389d2e29257ab0aaceb205f016dba3))
+
 ## [2.0.0](https://github.com/achingbrain/uint8-varint/compare/v1.0.8...v2.0.0) (2023-08-15)
 
 
