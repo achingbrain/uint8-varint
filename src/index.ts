@@ -239,6 +239,9 @@ export function decodeUint8ArrayList (buf: Uint8ArrayList, offset: number): numb
   throw new RangeError('Could not decode varint')
 }
 
+export function encode (value: number): Uint8Array
+export function encode (value: number, buf: Uint8Array, offset?: number): Uint8Array
+export function encode (value: number, buf: Uint8ArrayList, offset?: number): Uint8ArrayList
 export function encode <T extends Uint8Array | Uint8ArrayList = Uint8Array> (value: number, buf?: T, offset: number = 0): T {
   if (buf == null) {
     buf = allocUnsafe(encodingLength(value)) as T

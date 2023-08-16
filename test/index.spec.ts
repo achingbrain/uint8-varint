@@ -142,6 +142,12 @@ describe('uint8-varint', () => {
     }).to.throw(RangeError)
   })
 
+  it('should encode to Uint8Array by default', () => {
+    const buf: ArrayLike<number> = varint.encode(1234)
+
+    expect(buf).to.equalBytes([0xD2, 0x09])
+  })
+
   function randint (range: number): number {
     return Math.floor(Math.random() * range)
   }
