@@ -1,3 +1,15 @@
+## [2.0.3](https://github.com/achingbrain/uint8-varint/compare/v2.0.2...v2.0.3) (2023-12-28)
+
+
+### Trivial Changes
+
+* update project config ([#39](https://github.com/achingbrain/uint8-varint/issues/39)) ([3751833](https://github.com/achingbrain/uint8-varint/commit/37518333c46c6a18e32bdf2f9774fef9aee625fd))
+
+
+### Dependencies
+
+* bump uint8arrays from 4.0.10 to 5.0.0 ([#40](https://github.com/achingbrain/uint8-varint/issues/40)) ([6ebf2f8](https://github.com/achingbrain/uint8-varint/commit/6ebf2f85f1870a95a39d29decb0bc6bda451c767))
+
 ## [2.0.2](https://github.com/achingbrain/uint8-varint/compare/v2.0.1...v2.0.2) (2023-10-26)
 
 
