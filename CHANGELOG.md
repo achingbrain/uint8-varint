@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/achingbrain/uint8-varint/compare/v2.0.3...v2.0.4) (2024-01-30)
+
+
+### Dependencies
+
+* **dev:** bump aegir from 41.3.5 to 42.2.2 ([#47](https://github.com/achingbrain/uint8-varint/issues/47)) ([568a0df](https://github.com/achingbrain/uint8-varint/commit/568a0dfbe3634102e7ce96ee624875ded3243f30))
+
 ## [2.0.3](https://github.com/achingbrain/uint8-varint/compare/v2.0.2...v2.0.3) (2023-12-28)
 
 
