@@ -2,7 +2,7 @@
 
 import { expect } from 'aegir/chai'
 import varint from 'varint'
-import * as uint8varint from '../src/index.js'
+import * as uint8varint from '../src/index.ts'
 
 describe('varint', () => {
   it('compat', () => {

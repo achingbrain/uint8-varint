@@ -2,7 +2,7 @@
 
 import { expect } from 'aegir/chai'
 import { Uint8ArrayList } from 'uint8arraylist'
-import * as varint from '../src/index.js'
+import * as varint from '../src/index.ts'
 
 describe('uint8-varint', () => {
   it('should round trip unsigned values in a Uint8Array', () => {

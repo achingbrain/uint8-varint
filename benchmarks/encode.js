@@ -9,7 +9,7 @@ import Benchmark from 'benchmark'
 import accessor from 'byte-access'
 import { LongBits } from 'longbits'
 import { allocUnsafe } from 'uint8arrays/alloc'
-import { encode, encodingLength } from '../dist/src/index.js'
+import { encode, encodingLength } from '../src/index.ts'
 
 const suite = new Benchmark.Suite()
 
