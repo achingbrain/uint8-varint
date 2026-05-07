@@ -140,7 +140,7 @@
   },
   "dependencies": {
     "uint8arraylist": "^2.0.0",
-    "uint8arrays": "^5.0.0"
+    "uint8arrays": "^6.1.0"
   },
   "devDependencies": {
     "@types/varint": "^6.0.0",
