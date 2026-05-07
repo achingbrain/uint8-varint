@@ -1,3 +1,13 @@
+## [3.0.0](https://github.com/achingbrain/uint8-varint/compare/v2.0.5...v3.0.0) (2026-05-07)
+
+### ⚠ BREAKING CHANGES
+
+* Returned `Uint8Array`s are now generic
+
+### Bug Fixes
+
+* Uint8Arrays are generic ([#56](https://github.com/achingbrain/uint8-varint/issues/56)) ([0a0aa5f](https://github.com/achingbrain/uint8-varint/commit/0a0aa5fcd7ce2b442661366675e0a490be9bc0b7))
+
 ## [2.0.5](https://github.com/achingbrain/uint8-varint/compare/v2.0.4...v2.0.5) (2026-05-07)
 
 ### Dependencies
