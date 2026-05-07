@@ -51,7 +51,7 @@ export function encodingLength (value: number): number {
   return 8
 }
 
-export function encodeUint8Array (value: number, buf: Uint8Array, offset: number = 0): Uint8Array {
+export function encodeUint8Array <T extends ArrayBufferLike> (value: number, buf: Uint8Array<T>, offset: number = 0): Uint8Array<T> {
   switch (encodingLength(value)) {
     case 8: {
       buf[offset++] = (value & 0xFF) | MSB
@@ -91,7 +91,7 @@ export function encodeUint8Array (value: number, buf: Uint8Array, offset: number
   return buf
 }
 
-export function encodeUint8ArrayList (value: number, buf: Uint8ArrayList, offset: number = 0): Uint8ArrayList {
+export function encodeUint8ArrayList <T extends ArrayBufferLike> (value: number, buf: Uint8ArrayList<T>, offset: number = 0): Uint8ArrayList<T> {
   switch (encodingLength(value)) {
     case 8: {
       buf.set(offset++, (value & 0xFF) | MSB)
@@ -239,10 +239,10 @@ export function decodeUint8ArrayList (buf: Uint8ArrayList, offset: number): numb
   throw new RangeError('Could not decode varint')
 }
 
-export function encode (value: number): Uint8Array
-export function encode (value: number, buf: Uint8Array, offset?: number): Uint8Array
-export function encode (value: number, buf: Uint8ArrayList, offset?: number): Uint8ArrayList
-export function encode <T extends Uint8Array | Uint8ArrayList = Uint8Array> (value: number, buf?: T, offset: number = 0): T {
+export function encode (value: number): Uint8Array<ArrayBuffer>
+export function encode <T extends ArrayBufferLike> (value: number, buf: Uint8Array<T>, offset?: number): Uint8Array<T>
+export function encode <T extends ArrayBufferLike> (value: number, buf: Uint8ArrayList<T>, offset?: number): Uint8ArrayList<T>
+export function encode <B extends ArrayBufferLike, T extends Uint8Array<B> | Uint8ArrayList<B> = Uint8Array<B>> (value: number, buf?: T, offset: number = 0): T {
   if (buf == null) {
     buf = allocUnsafe(encodingLength(value)) as T
   }
