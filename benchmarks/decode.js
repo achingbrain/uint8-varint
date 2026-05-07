@@ -7,7 +7,7 @@ $ npx playwright-test benchmarks/append.js --runner benchmark
 
 import Benchmark from 'benchmark'
 import { LongBits } from 'longbits'
-import { decode, encode } from '../dist/src/index.js'
+import { decode, encode } from '../src/index.ts'
 
 const suite = new Benchmark.Suite()
 
