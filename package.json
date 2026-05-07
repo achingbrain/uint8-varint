@@ -144,7 +144,7 @@
   },
   "devDependencies": {
     "@types/varint": "^6.0.0",
-    "aegir": "^44.1.1",
+    "aegir": "^48.0.1",
     "benchmark": "^2.1.4",
     "byte-access": "^1.0.0",
     "longbits": "^1.1.0",
